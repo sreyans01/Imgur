@@ -1,10 +1,12 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id "kotlin-parcelize"
 }
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.assign.imgur"
@@ -15,7 +17,6 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
     buildTypes {
         release {
             minifyEnabled false
@@ -29,6 +30,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    dataBinding {
+        enabled true
+    }
 }
 
 dependencies {
@@ -40,4 +44,16 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'javax.inject:javax.inject:1'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0@aar'
+    implementation 'com.google.dagger:dagger:2.27'
+    implementation 'androidx.fragment:fragment-ktx:1.5.2@aar'
+    implementation 'androidx.activity:activity-ktx:1.5.1@aar'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.0'
+    implementation 'com.squareup.picasso:picasso:2.8'
+
 }
