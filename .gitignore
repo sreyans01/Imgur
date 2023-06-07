@@ -13,11 +13,5 @@
 .externalNativeBuild
 .cxx
 local.properties
-bin/
-gen/
-Thumbs.db
-.idea
-build/
-
 
 
