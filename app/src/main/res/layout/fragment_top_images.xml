@@ -15,17 +15,40 @@
         android:background="@color/light_grey_bg_1"
         tools:context=".MainActivity">
 
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/searchView"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_marginHorizontal="8dp"
-            android:background="@drawable/background_rect_curved_all_20"
-            android:backgroundTint="@color/white"
-            android:iconifiedByDefault="false"
-            android:queryHint="Search..."
-            />
+            android:animateLayoutChanges="true">
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/searchView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                app:iconifiedByDefault="false"
+                android:background="@drawable/background_rect_curved_all_20"
+                android:backgroundTint="@color/white"
+                android:iconifiedByDefault="false"
+                android:queryHint="Search..."
+                app:layout_constraintEnd_toStartOf="@+id/toggle_layout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/toggle_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:background="@drawable/background_circle"
+                android:backgroundTint="@color/purple_200"
+                android:padding="8dp"
+                android:src="@drawable/ic_baseline_view_list_24"
+                app:layout_constraintBottom_toBottomOf="@+id/searchView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/searchView" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         <androidx.recyclerview.widget.RecyclerView

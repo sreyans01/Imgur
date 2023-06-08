@@ -10,6 +10,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.assign.imgur.GalleryTopWeekImages
 import com.assign.imgur.ImageData
 import com.assign.imgur.R
@@ -17,7 +19,6 @@ import com.assign.imgur.adapters.ImagesAdapter
 import com.assign.imgur.databinding.FragmentTopImagesBinding
 import com.assign.imgur.utils.Resource
 import com.assign.imgur.utils.Status
-import com.assign.imgur.utils.Utils
 import com.assign.imgur.viewmodels.GalleryViewModel
 
 
@@ -60,20 +61,32 @@ class TopImagesFragment : Fragment() {
                 val searchedData = queryImagesData(query, filteredImageData)
                 adapter?.setList(searchedData)
                 adapter?.notifyDataSetChanged()
-                Log.i("KKKKKKK",query)
                 return true
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
                 // Perform live search or filtering as the text changes
+                if(newText.isEmpty()) {
+                    resetRecyclerView()
+                }
                 return true
             }
         })
 
         binding.searchView.setOnCloseListener {
-            adapter?.setList(filteredImageData)
-            adapter?.notifyDataSetChanged()
-            true
+            resetRecyclerView()
+            false
+        }
+
+        binding.toggleLayout.setOnClickListener {
+            if(binding.imagesRecyclerView.layoutManager is GridLayoutManager) {
+                binding.toggleLayout.setImageResource(R.drawable.ic_baseline_view_list_24)
+                binding.imagesRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+            } else {
+                binding.toggleLayout.setImageResource(R.drawable.ic_baseline_grid_view_24)
+                binding.imagesRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+            }
+            binding.imagesRecyclerView.setAdapter(adapter)
         }
 
     }
@@ -98,12 +111,12 @@ class TopImagesFragment : Fragment() {
     }
 
     private fun updateUI() {
-        initRecyclerView(filteredImageData)
+        initRecyclerView(getFilteredImagesData(galleryTopWeekImages?.data))
     }
 
 
     private fun initRecyclerView(imagesData: ArrayList<ImageData>) {
-        galleryTopWeekImages?.let {
+        if(imagesData.size > 0) {
             adapter = ImagesAdapter(requireContext(), imagesData)
             binding.imagesRecyclerView.setAdapter(adapter)
         }
@@ -147,5 +160,10 @@ class TopImagesFragment : Fragment() {
             }
         }
         return filteredImagesData
+    }
+
+    private fun resetRecyclerView() {
+        adapter?.setList(filteredImageData)
+        adapter?.notifyDataSetChanged()
     }
 }

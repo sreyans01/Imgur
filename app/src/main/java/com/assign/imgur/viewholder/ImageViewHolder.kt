@@ -1,13 +1,11 @@
 package com.assign.imgur.viewholder
 
 import android.content.Context
-import android.opengl.Visibility
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.assign.imgur.ImageData
-import com.assign.imgur.Images
 import com.assign.imgur.databinding.ItemTopImagesBinding
 import com.squareup.picasso.Picasso
 import java.text.SimpleDateFormat
@@ -18,7 +16,7 @@ class ImageViewHolder(binding: ItemTopImagesBinding) :
     private var binding: ItemTopImagesBinding
     private val context: Context? = null
 
-    fun onBind(context: Context, data: ImageData) {
+    fun onBind(data: ImageData) {
         val firstImage = data.images.first()
         Picasso.get()
             .load(firstImage.link)

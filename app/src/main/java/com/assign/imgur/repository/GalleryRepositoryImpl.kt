@@ -1,15 +1,11 @@
 package com.assign.imgur.repository
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.assign.imgur.GalleryTopWeekImages
 import com.assign.imgur.interfaces.GalleryHttpInterface
 import com.assign.imgur.interfaces.GalleryRepository
-import com.assign.imgur.utils.AppDelegate
-import com.assign.imgur.utils.Constants
 import com.assign.imgur.utils.Resource
-import com.assign.imgur.utils.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

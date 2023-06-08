@@ -38,6 +38,6 @@ class ImagesAdapter(context: Context, dataList: ArrayList<ImageData>) :
     }
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
-        (holder as ImageViewHolder).onBind(context, dataList[position])
+        (holder as ImageViewHolder).onBind(dataList[position])
     }
 }
