@@ -1,4 +1,4 @@
-package com.assign.openinapp.di
+package com.assign.imgur.di
 
 import androidx.lifecycle.ViewModel
 import com.assign.imgur.di.ViewModelFactory

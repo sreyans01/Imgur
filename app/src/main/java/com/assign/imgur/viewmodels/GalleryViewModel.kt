@@ -1,10 +1,8 @@
 package com.assign.imgur.viewmodels
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.assign.imgur.GalleryTopWeekImages
-import com.assign.imgur.ImageData
 import com.assign.imgur.interfaces.GalleryRepository
 import com.assign.imgur.repository.GalleryRepositoryImpl
 import com.assign.imgur.utils.Resource

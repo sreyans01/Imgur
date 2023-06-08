@@ -20,6 +20,5 @@ data class Tags (
   @SerializedName("description"             ) var description            : String?                 = null,
   @SerializedName("logo_hash"               ) var logoHash               : String?                 = null,
   @SerializedName("logo_destination_url"    ) var logoDestinationUrl     : String?                 = null,
-  @SerializedName("description_annotations" ) var descriptionAnnotations : Any?                    = null
 
 )

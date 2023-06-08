@@ -10,6 +10,7 @@ import com.assign.imgur.databinding.ActivityMainBinding
 import com.assign.imgur.utils.AppDelegate
 import com.assign.imgur.utils.Constants
 import com.assign.imgur.utils.Status
+import com.assign.imgur.view.TopImagesFragment
 import com.assign.imgur.viewmodels.GalleryViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -22,18 +23,8 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         AppDelegate.getInstance().saveClientID(Constants.CLIENT_ID)
 
-        viewmodel.getGalleryTopWeekImages().observe(this, Observer { response->
-            when(response.status) {
-                Status.SUCCESS -> {
-
-                }
-                Status.ERROR -> {
-
-                }
-                Status.LOADING -> {
-
-                }
-            }
-        })
+        supportFragmentManager.beginTransaction()
+            .replace(binding.container.id, TopImagesFragment())
+            .commitNow()
     }
 }
