@@ -6,17 +6,20 @@ import com.assign.imgur.GalleryTopWeekImages
 import com.assign.imgur.interfaces.GalleryRepository
 import com.assign.imgur.repository.GalleryRepositoryImpl
 import com.assign.imgur.utils.Resource
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class GalleryViewModel() : ViewModel() {
-
+@HiltViewModel
+class GalleryViewModel @Inject constructor(
     private val galleryRepository: GalleryRepository
+) : ViewModel() {
 
     fun getGalleryTopWeekImages(): LiveData<Resource<GalleryTopWeekImages>> {
         return galleryRepository.getGalleryTopWeekImages()
     }
 
     init {
-        galleryRepository = GalleryRepositoryImpl()
+        getGalleryTopWeekImages()
     }
 
 }

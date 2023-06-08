@@ -13,10 +13,11 @@ import com.assign.imgur.utils.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
 
-class GalleryRepositoryImpl() : GalleryRepository {
-
+class GalleryRepositoryImpl @Inject constructor(
     private val galleryHttpInterface: GalleryHttpInterface
+) : GalleryRepository {
 
     override fun getGalleryTopWeekImages(): LiveData<Resource<GalleryTopWeekImages>> {
         val result: MutableLiveData<Resource<GalleryTopWeekImages>> =
@@ -41,11 +42,5 @@ class GalleryRepositoryImpl() : GalleryRepository {
                 }
             })
         return result
-    }
-
-    init {
-        galleryHttpInterface =
-            RetrofitClient.getClientWithInterceptor(AppDelegate.getInstance().clientID)
-                .create(GalleryHttpInterface::class.java)
     }
 }

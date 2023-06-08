@@ -3,7 +3,9 @@ package com.assign.imgur.utils
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
+import dagger.hilt.android.HiltAndroidApp
 
+@HiltAndroidApp
 class AppDelegate : Application() {
 
     companion object {

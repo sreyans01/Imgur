@@ -27,6 +27,7 @@ class TopImagesFragment : Fragment() {
     private lateinit var topWeekImagesObserver: Observer<Resource<GalleryTopWeekImages>>
     private var adapter: ImagesAdapter? = null
     private var galleryTopWeekImages: GalleryTopWeekImages? = null
+    private var filteredImageData = ArrayList<ImageData>()
 
     private val viewmodel: GalleryViewModel by activityViewModels()
 
@@ -56,7 +57,7 @@ class TopImagesFragment : Fragment() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 // Perform search or filter operation here based on the submitted query
-                val searchedData = queryImagesData(query, galleryTopWeekImages?.data)
+                val searchedData = queryImagesData(query, filteredImageData)
                 adapter?.setList(searchedData)
                 adapter?.notifyDataSetChanged()
                 Log.i("KKKKKKK",query)
@@ -69,6 +70,11 @@ class TopImagesFragment : Fragment() {
             }
         })
 
+        binding.searchView.setOnCloseListener {
+            adapter?.setList(filteredImageData)
+            adapter?.notifyDataSetChanged()
+            true
+        }
 
     }
 
@@ -77,6 +83,7 @@ class TopImagesFragment : Fragment() {
             when(response.status) {
                 Status.SUCCESS -> {
                     galleryTopWeekImages = response.data
+                    filteredImageData = getFilteredImagesData(galleryTopWeekImages?.data)
                     updateUI()
                 }
                 Status.ERROR -> {
@@ -91,14 +98,13 @@ class TopImagesFragment : Fragment() {
     }
 
     private fun updateUI() {
-        initRecyclerView(galleryTopWeekImages)
+        initRecyclerView(filteredImageData)
     }
 
 
-    private fun initRecyclerView(galleryTopWeekImages: GalleryTopWeekImages?) {
+    private fun initRecyclerView(imagesData: ArrayList<ImageData>) {
         galleryTopWeekImages?.let {
-            val topWeekImagesData = galleryTopWeekImages.data
-            adapter = ImagesAdapter(requireContext(), getFilteredImagesData(topWeekImagesData))
+            adapter = ImagesAdapter(requireContext(), imagesData)
             binding.imagesRecyclerView.setAdapter(adapter)
         }
     }
@@ -107,28 +113,38 @@ class TopImagesFragment : Fragment() {
      * Used to filter out the ImageData ArrayList not containing any image
      *
      */
-    private fun getFilteredImagesData(imagesData: ArrayList<ImageData>): ArrayList<ImageData> {
+    private fun getFilteredImagesData(imagesData: ArrayList<ImageData>?): ArrayList<ImageData> {
         val filteredImagesData = ArrayList<ImageData>()
-        for (imageData in imagesData) {
-            if (imageData.images.isNotEmpty())
-                filteredImagesData.add(imageData)
+        imagesData?.let {
+            for (imageData in imagesData) {
+                if (imageData.images.isNotEmpty()) {
+                    if (imageData.images.first().link.toString().lowercase().endsWith("jpg")
+                        || imageData.images.first().link.toString().lowercase().endsWith("png")) {
+                        filteredImagesData.add(imageData)
+                    }
+                }
+            }
         }
         return filteredImagesData
     }
 
     private fun queryImagesData(query: String, imagesData: ArrayList<ImageData>?): ArrayList<ImageData> {
-        var filteredImagesData = ArrayList<ImageData>()
-        val similarityMap = hashMapOf<ImageData, Double>()
+        val filteredImagesData = ArrayList<ImageData>()
         imagesData?.let {
             for (imageData in imagesData) {
                 if (imageData.images.isNotEmpty()) {
-                    val similarity = Utils.findSimilarity(imageData.title.toString(), query)
-                    similarityMap.put(imageData, similarity)
+                    if(imageData.title.toString().lowercase().startsWith(query.lowercase())) {
+                        filteredImagesData.add(imageData)
+                    }
                 }
             }
-
-            val sortedMap = similarityMap.toList().sortedByDescending { (_,similarity) -> similarity }.toMap()
-            filteredImagesData = ArrayList(sortedMap.keys.toList())
+            for (imageData in imagesData) {
+                if (imageData.images.isNotEmpty()) {
+                    if(!imageData.title.toString().lowercase().startsWith(query.lowercase()) && imageData.title.toString().lowercase().contains(query.lowercase())) {
+                        filteredImagesData.add(imageData)
+                    }
+                }
+            }
         }
         return filteredImagesData
     }

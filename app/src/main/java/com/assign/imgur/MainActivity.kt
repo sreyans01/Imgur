@@ -12,7 +12,9 @@ import com.assign.imgur.utils.Constants
 import com.assign.imgur.utils.Status
 import com.assign.imgur.view.TopImagesFragment
 import com.assign.imgur.viewmodels.GalleryViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
