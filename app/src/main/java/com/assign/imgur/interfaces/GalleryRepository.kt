@@ -7,5 +7,5 @@ import com.assign.imgur.utils.Resource
 
 
 interface GalleryRepository {
-    fun getGalleryTopWeekImages(): MutableLiveData<Resource<GalleryTopWeekImages>>
+    fun getGalleryTopWeekImages(): LiveData<Resource<GalleryTopWeekImages>>
 }

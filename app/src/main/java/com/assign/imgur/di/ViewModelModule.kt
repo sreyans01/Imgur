@@ -32,7 +32,7 @@ class ViewModelModule {
     @Provides
     @IntoMap
     @ViewModelKey(GalleryViewModel::class)
-    fun inviteAndLikesViewModel(): ViewModel {
+    fun galleryViewModel(): ViewModel {
         return GalleryViewModel()
     }
 }

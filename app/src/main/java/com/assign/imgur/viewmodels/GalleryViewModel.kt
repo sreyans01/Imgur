@@ -1,5 +1,6 @@
 package com.assign.imgur.viewmodels
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.assign.imgur.GalleryTopWeekImages
@@ -12,12 +13,8 @@ class GalleryViewModel() : ViewModel() {
 
     private val galleryRepository: GalleryRepository
 
-    private var galleryTopWeekImagesMutableLiveData = MutableLiveData<Resource<GalleryTopWeekImages>>()
-    val galleryTopWeekImagesLiveData = galleryTopWeekImagesMutableLiveData
-
-
-    private fun getGalleryTopWeekImages() {
-        galleryTopWeekImagesMutableLiveData = galleryRepository.getGalleryTopWeekImages()
+    fun getGalleryTopWeekImages(): LiveData<Resource<GalleryTopWeekImages>> {
+        return galleryRepository.getGalleryTopWeekImages()
     }
 
     init {

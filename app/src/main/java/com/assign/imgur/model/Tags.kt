@@ -7,8 +7,8 @@ data class Tags (
 
   @SerializedName("name"                    ) var name                   : String?                 = null,
   @SerializedName("display_name"            ) var displayName            : String?                 = null,
-  @SerializedName("followers"               ) var followers              : Int?                    = null,
-  @SerializedName("total_items"             ) var totalItems             : Int?                    = null,
+  @SerializedName("followers"               ) var followers              : Long?                    = null,
+  @SerializedName("total_items"             ) var totalItems             : Long?                    = null,
   @SerializedName("following"               ) var following              : Boolean?                = null,
   @SerializedName("is_whitelisted"          ) var isWhitelisted          : Boolean?                = null,
   @SerializedName("background_hash"         ) var backgroundHash         : String?                 = null,

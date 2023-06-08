@@ -1,10 +1,13 @@
 package com.assign.imgur.repository
 
+import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.assign.imgur.GalleryTopWeekImages
 import com.assign.imgur.interfaces.GalleryHttpInterface
 import com.assign.imgur.interfaces.GalleryRepository
 import com.assign.imgur.utils.AppDelegate
+import com.assign.imgur.utils.Constants
 import com.assign.imgur.utils.Resource
 import com.assign.imgur.utils.RetrofitClient
 import retrofit2.Call
@@ -15,7 +18,7 @@ class GalleryRepositoryImpl() : GalleryRepository {
 
     private val galleryHttpInterface: GalleryHttpInterface
 
-    override fun getGalleryTopWeekImages(): MutableLiveData<Resource<GalleryTopWeekImages>> {
+    override fun getGalleryTopWeekImages(): LiveData<Resource<GalleryTopWeekImages>> {
         val result: MutableLiveData<Resource<GalleryTopWeekImages>> =
             MutableLiveData<Resource<GalleryTopWeekImages>>()
         galleryHttpInterface.getGalleryTopWeekImages()

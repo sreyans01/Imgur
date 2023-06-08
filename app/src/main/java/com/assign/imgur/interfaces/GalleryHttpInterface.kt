@@ -6,6 +6,6 @@ import retrofit2.http.GET
 
 interface GalleryHttpInterface {
 
-    @GET("3/gallery/top/week")
+    @GET("gallery/top/week")
     fun getGalleryTopWeekImages(): Call<GalleryTopWeekImages>
 }

@@ -31,7 +31,7 @@ class AppDelegate : Application() {
         clientID = sharedPreferences.getString(KEY_CLIENT_ID, null)
     }
 
-    fun saveBearerToken(token: String) {
+    fun saveClientID(token: String) {
         clientID = token
 
         val editor = sharedPreferences.edit()
