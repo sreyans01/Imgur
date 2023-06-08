@@ -56,7 +56,9 @@ class TopImagesFragment : Fragment() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 // Perform search or filter operation here based on the submitted query
-                //performSearch(query)
+                val searchedData = queryImagesData(query, galleryTopWeekImages?.data)
+                adapter?.setList(searchedData)
+                adapter?.notifyDataSetChanged()
                 Log.i("KKKKKKK",query)
                 return true
             }
@@ -114,12 +116,19 @@ class TopImagesFragment : Fragment() {
         return filteredImagesData
     }
 
-    private fun queryImagesData(query: String, imagesData: ArrayList<ImageData>): ArrayList<ImageData> {
-        val filteredImagesData = ArrayList<ImageData>()
-        for (imageData in imagesData) {
-            if (imageData.images.isNotEmpty()) {
-
+    private fun queryImagesData(query: String, imagesData: ArrayList<ImageData>?): ArrayList<ImageData> {
+        var filteredImagesData = ArrayList<ImageData>()
+        val similarityMap = hashMapOf<ImageData, Double>()
+        imagesData?.let {
+            for (imageData in imagesData) {
+                if (imageData.images.isNotEmpty()) {
+                    val similarity = Utils.findSimilarity(imageData.title.toString(), query)
+                    similarityMap.put(imageData, similarity)
+                }
             }
+
+            val sortedMap = similarityMap.toList().sortedByDescending { (_,similarity) -> similarity }.toMap()
+            filteredImagesData = ArrayList(sortedMap.keys.toList())
         }
         return filteredImagesData
     }
