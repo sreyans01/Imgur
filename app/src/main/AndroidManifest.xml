@@ -14,9 +14,7 @@
         android:name=".utils.AppDelegate"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-
-        android:theme="@style/Theme.Imgur"
-        tools:targetApi="31">
+        android:theme="@style/Theme.Imgur">
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -26,6 +24,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name="androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity"
+            android:exported="false"
+            />
+
+        <activity android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity"
+            android:exported="false"
+            />
+
+        <activity android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyFloatingActivity"
+            android:exported="false"
+            />
 
     </application>
 
