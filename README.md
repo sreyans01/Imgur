@@ -1,7 +1,7 @@
 # Imgur
 
 Application that searches for the top images of the week from the Imgur gallery and displays them in a list. 
-Development done using MVVM Clean architecture pattern. 
+Development done using MVVM Clean architecture pattern. Api used - https://api.imgur.com/3/gallery/top/week
 
 ## Features
 - Search top images of the week
