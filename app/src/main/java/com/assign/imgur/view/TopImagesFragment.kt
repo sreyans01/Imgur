@@ -17,6 +17,7 @@ import com.assign.imgur.ImageData
 import com.assign.imgur.R
 import com.assign.imgur.adapters.ImagesAdapter
 import com.assign.imgur.databinding.FragmentTopImagesBinding
+import com.assign.imgur.utils.Constants
 import com.assign.imgur.utils.Resource
 import com.assign.imgur.utils.Status
 import com.assign.imgur.viewmodels.GalleryViewModel
@@ -82,9 +83,11 @@ class TopImagesFragment : Fragment() {
             if(binding.imagesRecyclerView.layoutManager is GridLayoutManager) {
                 binding.toggleLayout.setImageResource(R.drawable.ic_baseline_view_list_24)
                 binding.imagesRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+                adapter?.setViewType(Constants.VIEWTYPE_LIST)
             } else {
                 binding.toggleLayout.setImageResource(R.drawable.ic_baseline_grid_view_24)
                 binding.imagesRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+                adapter?.setViewType(Constants.VIEWTYPE_GRID)
             }
             binding.imagesRecyclerView.setAdapter(adapter)
         }

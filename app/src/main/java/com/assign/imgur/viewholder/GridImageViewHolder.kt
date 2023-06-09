@@ -6,14 +6,14 @@ import android.view.View.VISIBLE
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.assign.imgur.ImageData
-import com.assign.imgur.databinding.ItemTopImagesBinding
+import com.assign.imgur.databinding.ItemTopImagesGridviewBinding
 import com.squareup.picasso.Picasso
 import java.text.SimpleDateFormat
 import java.util.*
 
-class ImageViewHolder(binding: ItemTopImagesBinding) :
+class GridImageViewHolder(binding: ItemTopImagesGridviewBinding) :
     RecyclerView.ViewHolder(binding.root) {
-    private var binding: ItemTopImagesBinding
+    private var binding: ItemTopImagesGridviewBinding
     private val context: Context? = null
 
     fun onBind(data: ImageData) {
@@ -23,7 +23,7 @@ class ImageViewHolder(binding: ItemTopImagesBinding) :
             .fit()
             .into(binding.image)
         val dateTime = Date(firstImage.datetime ?: 0L)
-        val format = SimpleDateFormat("dd/mm/yy hh:mm aa")
+        val format = SimpleDateFormat("DD/MM/YY hh:mm aa")
         binding.datetime.setText(format.format(dateTime))
         binding.title.setText(data.title)
         if (data.imagesCount == 1L)
@@ -34,7 +34,7 @@ class ImageViewHolder(binding: ItemTopImagesBinding) :
     }
 
     init {
-        this.binding = binding as ItemTopImagesBinding
+        this.binding = binding as ItemTopImagesGridviewBinding
         binding.lifecycleOwner = context as LifecycleOwner?
     }
 

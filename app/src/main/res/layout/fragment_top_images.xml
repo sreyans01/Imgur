@@ -56,10 +56,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingVertical="20dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             tools:itemCount="5"
             app:spanCount="2"
-            tools:listitem="@layout/item_top_images"/>
+            tools:listitem="@layout/item_top_images_gridview"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 </layout>
