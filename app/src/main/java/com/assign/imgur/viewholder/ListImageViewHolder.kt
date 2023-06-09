@@ -16,6 +16,10 @@ class ListImageViewHolder(binding: ItemTopImagesListviewBinding) :
     private var binding: ItemTopImagesListviewBinding
     private val context: Context? = null
 
+    /**
+     * Sets the contents of recycler view item.
+     * @param data - the data received from the adapter class to bind the view to.
+     */
     fun onBind(data: ImageData) {
         val firstImage = data.images.first()
         Picasso.get()

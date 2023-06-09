@@ -20,6 +20,7 @@ class ImagesAdapter(context: Context, dataList: ArrayList<ImageData>) :
     private val dataList: ArrayList<ImageData>
     private var viewType = Constants.VIEWTYPE_GRID
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         when(this.viewType) {
@@ -47,6 +48,10 @@ class ImagesAdapter(context: Context, dataList: ArrayList<ImageData>) :
         return this.dataList.size
     }
 
+    /**
+     * Sets a new list of recycler view items
+     * @param list - the new list to be set
+     */
     fun setList(list: ArrayList<ImageData>) {
         this.dataList.clear()
         this.dataList.addAll(list)
@@ -57,6 +62,11 @@ class ImagesAdapter(context: Context, dataList: ArrayList<ImageData>) :
         this.context = context
     }
 
+    /**
+     * Calls the OnBind from the correct viewholder class as per the viewtype
+     * @param holder - viewholder object which holds the view
+     * @param position - the current item position
+     */
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is GridImageViewHolder) {
             (holder as GridImageViewHolder).onBind(dataList[position])
@@ -65,6 +75,10 @@ class ImagesAdapter(context: Context, dataList: ArrayList<ImageData>) :
         }
     }
 
+    /**
+     * Set viewtype as GRID or LIST of recycler view item.
+     * @param viewType - 0 represents GRID view type, 1 represents LIST view type
+     */
     fun setViewType(viewType: Int) {
         this.viewType = viewType
     }

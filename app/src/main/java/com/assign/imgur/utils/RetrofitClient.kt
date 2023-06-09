@@ -10,23 +10,11 @@ import java.util.concurrent.TimeUnit
 
 object RetrofitClient {
     private var retrofit: Retrofit? = null
-    fun getClient(baseUrl: String): Retrofit {
-        val gson = GsonBuilder().setLenient().create()
-        val client = OkHttpClient().newBuilder()
-            .connectTimeout(60, TimeUnit.SECONDS)
-            .readTimeout(60, TimeUnit.SECONDS)
-            .writeTimeout(60, TimeUnit.SECONDS)
-            .build()
-        if (retrofit == null) {
-            retrofit = Retrofit.Builder()
-                .baseUrl(baseUrl)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .client(client)
-                .build()
-        }
-        return retrofit!!
-    }
 
+    /**
+     * Retrofit client with Authorization parameter.
+     * @param token - Authorization token or client id
+     */
     fun getClientWithInterceptor(token: String?): Retrofit {
 
         // Create OkHttp client with default header

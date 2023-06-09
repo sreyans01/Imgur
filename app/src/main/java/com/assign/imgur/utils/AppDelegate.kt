@@ -5,6 +5,10 @@ import android.content.Context
 import android.content.SharedPreferences
 import dagger.hilt.android.HiltAndroidApp
 
+/**
+ * Entry point of the application.
+ * Used as a local keystore.
+ */
 @HiltAndroidApp
 class AppDelegate : Application() {
 

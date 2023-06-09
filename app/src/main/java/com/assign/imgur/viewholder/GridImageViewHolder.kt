@@ -16,12 +16,18 @@ class GridImageViewHolder(binding: ItemTopImagesGridviewBinding) :
     private var binding: ItemTopImagesGridviewBinding
     private val context: Context? = null
 
+    /**
+     * Sets the contents of recycler view item.
+     * @param data - the data received from the adapter class to bind the view to.
+     */
     fun onBind(data: ImageData) {
         val firstImage = data.images.first()
         Picasso.get()
             .load(firstImage.link)
             .fit()
             .into(binding.image)
+
+        //Converting the datetime received as Long to our required format
         val dateTime = Date(firstImage.datetime ?: 0L)
         val format = SimpleDateFormat("DD/MM/YY hh:mm aa")
         binding.datetime.setText(format.format(dateTime))

@@ -12,9 +12,13 @@ import retrofit2.Response
 import javax.inject.Inject
 
 class GalleryRepositoryImpl @Inject constructor(
-    private val galleryHttpInterface: GalleryHttpInterface
+    private val galleryHttpInterface: GalleryHttpInterface,
 ) : GalleryRepository {
 
+    /**
+     * Gets the top week images from gallery using the Imgur API
+     * @return - Returns the gallery top week images live data wrapped by a Resource class
+     */
     override fun getGalleryTopWeekImages(): LiveData<Resource<GalleryTopWeekImages>> {
         val result: MutableLiveData<Resource<GalleryTopWeekImages>> =
             MutableLiveData<Resource<GalleryTopWeekImages>>()
