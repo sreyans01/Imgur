@@ -12,7 +12,7 @@ Development done using MVVM Clean architecture pattern. Api used - https://api.i
 - Dependency Injection using Dagger Hilt
 
 ## Instruction To Run App
-- Clone / Download repository using  [Repo Link]https://github.com/sreyans01/Imgur.git)
+- Clone / Download repository using  [Repo Link](https://github.com/sreyans01/Imgur.git)
 - Open Imgur project in Android Studio
 - Build Project
 - Select device/emulator and run
